@@ -1,5 +1,6 @@
 //selectors
 
+export const getAllPosts = (state) => state.posts;
 // actions
 const createActionName = actionName => `app/posts/${actionName}`;
 
@@ -10,5 +11,4 @@ const postsReducer = (statePart = [], action) => {
       return statePart;
   };
 };
-
 export default postsReducer;

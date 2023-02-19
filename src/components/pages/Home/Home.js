@@ -1,13 +1,20 @@
-import Container from 'react-bootstrap/Container';
-import PostCard from '../../features/PostCard/PostCard';
+import PostContainer from "../../features/PostContainer/PostContainer";
+import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-function Home() {
+const Home = () => {
+	
 	return (
-	  <Container>
-		<h1>All posts</h1>
-		<PostCard/>
-	  </Container>
-	);
-  }
-  
-  export default Home;
+	  <>
+		<div className="d-flex justify-content-between">
+		  <h1>All posts</h1>
+		  <Link to="/post/add">
+			<Button variant="outline-info">Add post</Button>
+		  </Link>
+
+		  </div>
+      <PostContainer />
+    </>
+  );
+};
+export default Home;

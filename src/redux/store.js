@@ -8,7 +8,7 @@ const subreducers = {
 }
 
 
-export const getAllPosts = (state) => state.posts;
+
 
 
 const reducer = combineReducers(subreducers);
