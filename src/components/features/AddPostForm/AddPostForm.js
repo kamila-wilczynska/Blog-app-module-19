@@ -4,6 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import { addPost } from '../../../redux/postsRedux';
 
 function AddPostForm(props) {
 
@@ -16,22 +17,30 @@ function AddPostForm(props) {
 	const [shortDescription, setshortDescription] = useState("");
 	const [content, setContent] = useState("");
 
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		dispatch(
+		  addPost({ title, author, published, shortDescription, content })
+		);
+		navigate(-1);
+	  };
+
 	return (
 		<>
 			<Row className="justify-content-md-center">
 				<Col xs={12} md={10} >
-					<Form>
+				<Form onSubmit={handleSubmit}>
 						<Col md={6}>
 
 							<Form.Group className="mb-3" controlId="title">
 								<Form.Label>Title</Form.Label>
-								<Form.Control type="email" placeholder="Enter title" 
+								<Form.Control type="text" placeholder="Enter title" 
 								onChange={(e) => setTitle(e.target.value)}/>
 							</Form.Group>
 
 							<Form.Group className="mb-3" controlId="Author">
 								<Form.Label>Author</Form.Label>
-								<Form.Control type="email" placeholder="Enter author" 
+								<Form.Control type="text" placeholder="Enter author" 
 								onChange={(e) => setAuthor(e.target.value)}/>
 							</Form.Group>
 
