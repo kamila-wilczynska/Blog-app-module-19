@@ -1,7 +1,7 @@
 function PostEdit() {
 	return (
 	  <div>
-		<h1>render About</h1>
+		<h1>Edit</h1>
 	  </div>
 	);
   }

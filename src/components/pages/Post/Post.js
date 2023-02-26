@@ -1,43 +1,67 @@
-import { Container } from "react-bootstrap";
+//import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { Button, Row, Col } from "react-bootstrap";
-import { useSelector } from "react-redux";
+
+import { useDispatch, useSelector } from "react-redux";
 import { getPostById } from "../../../redux/postsRedux";
+import { Button, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import RemovePostModal from "../../features/Modal/RemovePostModal";
+import { useState } from "react";
+import { Navigate } from "react-router-dom";
+import { removePost } from "../../../redux/postsRedux";
 
-function Post() {
+
+const Post = (props) => {
 	const { id } = useParams();
-	const postInformation = useSelector((state) => getPostById(state, id))
-	return (
-		<Container>
-			<Row className="justify-content-center">
-			<Col md={8} className="d-flex justify-content-between">
-				<h1>{postInformation.title} </h1>
-				</Col>
-				<Col md={4}>
-					<div>
-						<Link key={postInformation.id} to={"/post/edit/" + postInformation.id}>
-							<Button variant="outline-info" className="m-2">
-								Edit
-							</Button>
-						</Link>
-						<Button variant="outline-danger">Delete</Button>
-					</div>
-				</Col>
-			</Row>
-			<Row>
-				<Col md="auto">
-					<p><b>Author:</b>
-						{postInformation.author} </p>
+	const postContent = useSelector((state) => getPostById(state, id));
+	const [modal, setModal] = useState(false);
+	const closeModal = () => setModal(false);
+	const openModal = () => setModal(true);
+	const dispatch = useDispatch();
+	const deletePost = (e) => {
+		e.preventDefault();
+		dispatch(removePost(postContent.id));
+		setModal(false);
+	}
+	if (modal) {
+		return <RemovePostModal show={modal} closeModal={closeModal} deletePost={deletePost} />;
+	  }
+	  if (!postContent) {
+		return <Navigate to="/" />;
+	  } else 
+		return (
+			<>
+				<Row className="justify-content-center">
+					<Col md={8} className="d-flex justify-content-between">
+						<h1>{postContent.title}</h1>
+						<div>
+							<Link key={postContent.id} to={"/post/edit/" + postContent.id}>
+								<Button variant="outline-info" className="m-2">
+									Edit
+								</Button>
+							</Link>
+							<Button variant="outline-danger" onClick={openModal}>
+								Delete
+								</Button>
+								
+						</div>
+					</Col>
+				</Row>
+				<Row className="justify-content-center">
+          <Col md={8}>
+            <p>
+              <b>Author: </b>
+              {postContent.author}
+            </p>
+            <p>
+              <b>Published:</b> {postContent.publishedDate}
+            </p>
+            <p>{postContent.content}</p>
+          </Col>
+        </Row>
+      </>
+    );
+};
 
-					<p><b>Published: </b>
-						{postInformation.publishedDate} </p>
-						{postInformation.content}
-				</Col>
-			</Row>
 
-		</Container>
-	);
-}
-
-export default Post;
+	export default Post;

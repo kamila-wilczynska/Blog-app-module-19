@@ -14,7 +14,7 @@ const PostCard = (props) => {
               Short description: {props.description}
             </p>
           </Card.Text>
-          <Link key={props.postId} to={"/post/" + props.postId}>
+          <Link key={props.postId} to={"/post/" + props.id}>
             <Button variant="primary">Read more</Button>
           </Link>
         </Card.Body>
