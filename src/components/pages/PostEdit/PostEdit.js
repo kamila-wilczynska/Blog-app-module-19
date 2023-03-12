@@ -1,7 +1,9 @@
+import EditPostForm from "../../features/EditPostForm/EditPostForm";
+
 function PostEdit() {
 	return (
 	  <div>
-		<h1>Edit</h1>
+		<EditPostForm/>
 	  </div>
 	);
   }
