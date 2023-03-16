@@ -1,6 +1,6 @@
 //import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { dateToStr} from "../../../utils/dateToStr";
+//import { dateToStr} from "../../../utils/dateToStr";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getPostById } from "../../../redux/postsRedux";
@@ -10,7 +10,6 @@ import RemovePostModal from "../../features/Modal/RemovePostModal";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { removePost } from "../../../redux/postsRedux";
-
 
 
 const Post = (props) => {
@@ -56,7 +55,7 @@ const Post = (props) => {
               {postContent.author}
             </p>
             <p>
-			  <b>Published:</b> {dateToStr(postContent.publishedDate)}
+			<b>Published:</b> {postContent.published}
             </p>
             <p>{postContent.content}</p>
           </Col>
