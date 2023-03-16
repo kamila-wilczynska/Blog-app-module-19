@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
+import { dateToStr } from "../../../utils/dateToStr"
 
 const PostCard = (props) => {
   return (
@@ -8,7 +9,8 @@ const PostCard = (props) => {
         <Card.Body>
           <Card.Title>{props.title}</Card.Title>
           <p className="font-weight-bold">Author: {props.author}</p>
-          <p className="text-muted">Published: {props.date}</p>
+          {/*<p className="text-muted">Published: {props.date}</p>*/}
+		  <div><b>Published:</b> {dateToStr(props.date)}</div>
           <Card.Text>
             <p className="font-weight-bold">
               Short description: {props.description}

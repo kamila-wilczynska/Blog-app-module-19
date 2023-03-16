@@ -1,6 +1,8 @@
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useState } from "react";
-//import dateFormat from "dateformat";
+
+import DatePicker from "react-datepicker";
+
 
 
 const PostForm = ({ action, actionText, ...props }) => {
@@ -51,18 +53,15 @@ const PostForm = ({ action, actionText, ...props }) => {
                 />
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="published">
-                <Form.Label>Published</Form.Label>
-                <Form.Control
-                  type="date"
-                  placeholder="Enter date"
-                  required
-                  onChange={(e) =>
-                    setPublished((e.target.value, "yyyy-mm-dd"))
-                  }
-                  value={published}
-                />
-              </Form.Group>
+              
+			  <Form.Group className="mb-3" controlId="published">
+                        <Form.Label>Published</Form.Label>
+						<DatePicker>
+                        selected={published ? new Date(published) : new Date()}
+                        onChange={(date) => setPublished(date)}
+                        </DatePicker>
+                    </Form.Group>
+
             </Col>
             <Form.Group className="mb-3" controlId="description">
               <Form.Label>Short Description</Form.Label>
