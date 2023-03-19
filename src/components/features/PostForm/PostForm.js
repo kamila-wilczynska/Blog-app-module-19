@@ -13,9 +13,11 @@ const PostForm = ({ action, actionText, ...props }) => {
 	const [content, setContent] = useState(props.content || "");
 
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
-	action({ title, author, published, shortDescription, content });
+    console.log(published)
+	action({ title, author, publishedDate: published, shortDescription, content });
   };
 
   return (
